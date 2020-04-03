@@ -18,7 +18,85 @@
         </header>
         <ul></ul>
     </div>
-    <script src="custom.js"></script>
+    <script>
+        Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@samdevmeshach 
+samdevmeshach
+/
+samdevmeshach.github.io
+1
+00
+ Code Issues 0 Pull requests 0 Actions Projects 0 Wiki Security Insights Settings
+samdevmeshach.github.io/custom.js /
+@samdevmeshach samdevmeshach change
+8b34d41 8 minutes ago
+41 lines (37 sloc)  1.06 KB
+  
+Code navigation is available!
+Navigate your code with ease. Click on function and method calls to jump to their definitions or references in the same repository. Learn more
+
+const url = 'http://www.omdbapi.com/?apikey=25dd6efd&';
+const button = document.querySelector("button");
+const form = document.querySelector("form");
+const ul = document.querySelector("ul");
+
+button.addEventListener("click", e =>{
+    e.preventDefault();
+    const search = url + 't=' + document.getElementById("search").value.trim();
+    fetchData(search);
+    form.reset();
+    // console.log(search);
+});
+
+
+function fetchData(search){
+    // console.log(search);
+    fetch(search).then((response) => {
+    // console.log('resolved', response);
+    return response.json();
+    }).then((data)=> {
+        display(data);
+    })
+    .catch((err) =>
+    {
+        // console.log('rejected', err);
+    });
+}
+
+function display(data){
+    const dis = `
+    <li>Moive : ${data.Title}</li>
+    <li>Year : ${data.Year}</li>
+    <li>Language : ${data.Language}</li>
+    <li>Rated : ${data.Rated}</li>
+    <li>Movie Type : ${data.Type}</li>
+    <li>Genre : ${data.Genre}</li>
+    <li>Actors : ${data.Actors}</li>
+    <li>IMDB Ratings : ${data.imdbRating}</li>
+    `;    
+    ul.innerHTML = dis;
+}
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+
+    </script>
     <link rel="stylesheet" href="style.css">
 </body>
 </html>
